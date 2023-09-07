@@ -1,12 +1,10 @@
 from tkinter import *
-
 root = Tk()
+root.title = 'test program'
 
-screen = Canvas(root, width=800, height=700, bg="#ADD0E6")
+screen=Canvas(root, width = 200, height = 200, bg = "gray")
 screen.pack()
 
-
-screen.create_line(0, 0, 800, 700)
-screen.create_line(0, 800, 700, 0)
+screen.create_line(0, 0, 100, 100, 200, 0)
 
 mainloop()
