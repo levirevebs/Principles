@@ -25,7 +25,7 @@ while True:
         break
     else:
         if user_guess > secret:
-            print("You guessed tp high.")
+            print("You guessed to high.")
         elif user_guess < secret:
             print("You guessed to low.")
         user_guess = input("Enter a number between 0 and 20: Enter -1 to exit ")
