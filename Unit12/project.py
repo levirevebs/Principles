@@ -6,6 +6,8 @@ r ="#d62b18"
 b ="#876f16"
 s ="#fa9644"
 g = "#6185f8"
+l =  "#000000"
+e = "#e1c699"
 clear_color = "#4d2d44"
 
 start_x = 0
@@ -14,6 +16,19 @@ size = 20
 
 screen = Canvas(root, width=320, height=320, bg="#4d2d44")
 screen.pack()
+
+options = [
+    "Small Mario",
+    "Fire Mario",
+    "Big Mario",
+    "Goomba"
+]
+
+clicked = StringVar()
+clicked.set("Small Mario")
+
+dropDown = OptionMenu(root, clicked, *options)
+dropDown.pack()
 
 small_mario = [
     [g, g, g, r, r, r, r, r, r, g, g, g, g, g, g, g],
@@ -34,6 +49,24 @@ small_mario = [
     [b, b, b, b, g, g, g, g, b, b, b, b, g, g, g, g]
 ]
     
+goomba = [
+    [g, g, g, g, g, g, b, b, b, b, g, g, g, g, g, g],
+    [g, g, g, g, g, b, b, b, b, b, b, g, g, g, g, g],
+    [g, g, g, g, b, b, b, b, b, b, b, b, g, g, g, g],
+    [g, g, g, b, b, b, b, b, b, b, b, b, b, g, g, g],
+    [g, g, b, l, l, b, b, b, b, b, b, l, l, b, g, g],
+    [g, b, b, b, e, l, b, b, b, b, l, e, b, b, b, g],
+    [g, b, b, b, e, l, l, l, l, l, l, e, b, b, b, g],
+    [b, b, b, b, e, l, e, b, b, e, l, e, b, b, b, b],
+    [b, b, b, b, e, e, e, b, b, e, e, e, b, b, b, b],
+    [b, b, b, b, b, b, b, b, b, b, b, b, b, b, b, b],
+    [g, b, b, b, b, e, e, e, e, e, e, b, b, b, b, g],
+    [g, g, g, g, e, e, e, e, e, e, e, e, g, g, g, g],
+    [g, g, g, g, e, e, e, e, e, e, e, e, l, l, g, g],
+    [g, g, g, l, l, e, e, e, e, e, l, l, l, l, l, g],
+    [g, g, g, l, l, l, e, e, e, l, l, l, l, l, l, g],
+    [g, g, g, g, l, l, l, g, g, l, l, l, l, l, g, g]
+]
 
 def draw_rectangle(x, y, width, height, color='#000000'):
     ending_x = x + width
