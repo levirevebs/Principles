@@ -68,6 +68,36 @@ goomba = [
     [g, g, g, g, l, l, l, g, g, l, l, l, l, l, g, g]
 ]
 
+big_mario = [
+    [g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g],
+    [g, g, g, g, g, g, g, r, r, r, r, r, g, g, g, g, g, g],
+    [g, g, g, g, g, r, r, r, r, r, r, s, g, g, g, g, g, g],
+    [g, g, g, g, r, r, r, r, r, r, s, s, g, g, g, g, g, g],
+    [g, g, g, g, r, r, r, r, r, r, r, r, r, r, r, g, g, g],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+]
+
 def draw_rectangle(x, y, width, height, color='#000000'):
     ending_x = x + width
     ending_y = y + height
@@ -84,17 +114,21 @@ def draw_sprite(sprite_data):
         y = y + size
 
 def clear():
-    x = start_x
-    y = start_y 
-    for row in range(16):
-        for color in range(16):
-            draw_rectangle(x, y, size, size, clear_color)
-            x += size
-        x = start_x
-        y = y + size
+   screen.delete("all")
 
-draw_rectangle(0, 0, 20, 20, r)
-draw_sprite(small_mario)
+def draw():
+    clear()
+    current_option = clicked.get()
+    if current_option == "Small Mario":
+        draw_sprite(small_mario)
+    elif current_option == "Goomba":
+        draw_sprite(goomba)
 
+
+draw_button = Button(root, text="Draw Sprite", command=draw)
+draw_button.pack()
+
+draw_button = Button(root, text="Clear Canvas", command=clear)
+draw_button.pack()
 
 mainloop()
