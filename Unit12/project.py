@@ -9,21 +9,7 @@ g = "#6185f8"
 l =  "#000000"
 e = "#e1c699"
 clear_color = "#4d2d44"
-
-screen = Canvas(root, width=320, height=320, bg="#4d2d44")
-screen.pack()
-
-options = [
-    "Small Mario",
-    "Big Mario",
-    "Goomba"
-]
-
-clicked = StringVar()
-clicked.set("Small Mario")
-
-dropDown = OptionMenu(root, clicked, *options)
-dropDown.pack()
+pixel_size = 20
 
 small_mario = [
     [g, g, g, r, r, r, r, r, r, g, g, g, g, g, g, g],
@@ -77,83 +63,84 @@ big_mario = [
     [g, g, b, b, b, s, s, s, s, s, b, b, b, b, b, g, g, g],
     [g, g, g, g, b, b, s, s, s, s, s, s, s, s, g, g, g, g],
     [g, g, g, g, g, r, s, s, s, s, s, b, g, g, g, g, g, g],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
-    [],
+    [g, g, g, g, g, b, r, b, b, b, b, r, b, g, g, g, g, g],
+    [g, g, g, g, b, b, r, b, b, b, b, r, b, b, g, g, g, g],
+    [g, g, g, b, b, b, r, b, b, b, b, r, b, b, b, g, g, g],
+    [g, g, b, b, b, b, r, b, b, b, b, r, b, b, b, b, g, g],
+    [g, g, b, b, b, r, r, b, b, b, b, r, r, b, b, b, g, g],
+    [g, b, b, b, b, r, r, b, b, b, b, r, r, b, b, b, b, g],
+    [g, b, b, b, b, r, r, r, r, r, r, r, r, b, b, b, b, g],
+    [g, b, b, b, b, r, s, r, r, r, r, s, r, b, b, b, b, g],
+    [g, s, s, s, s, r, r, r, r, r, r, r, r, s, s, s, s, g],
+    [g, s, s, s, s, r, r, r, r, r, r, r, r, s, s, s, s, g],
+    [g, g, s, s, s, r, r, r, r, r, r, r, r, s, s, s, g, g],
+    [g, g, s, s, r, r, r, r, r, r, r, r, r, r, s, s, g, g],
+    [g, g, g, r, r, r, r, r, r, r, r, r, r, r, r, g, g, g],
+    [g, g, r, r, r, r, r, r, g, g, r, r, r, r, r, r, g, g],
+    [g, g, r, r, r, r, r, g, g, g, g, r, r, r, r, r, g, g],
+    [g, g, r, r, r, r, r, g, g, g, g, r, r, r, r, r, g, g],
+    [g, g, g, b, b, b, b, g, g, g, g, b, b, b, b, g, g, g],
+    [g, g, g, b, b, b, b, g, g, g, g, b, b, b, b, g, g, g],
+    [g, b, b, b, b, b, b, g, g, g, g, b, b, b, b, b, b, g],
+    [g, b, b, b, b, b, b, g, g, g, g, b, b, b, b, b, b, g],
 ]
+
+screen = Canvas(root, width=320, height=320, bg="#4d2d44")
+screen.pack()
+
+current_sprite = small_mario
+
+options = [
+    "Small Mario",
+    "Big Mario",
+    "Goomba"
+]
+
+clicked = StringVar()
+clicked.set("Small Mario")
+
+dropDown = OptionMenu(root, clicked, *options)
+dropDown.pack()
 
 def draw_rectangle(x, y, width, height, color='#000000'):
     ending_x = x + width
     ending_y = y + height
     screen.create_rectangle(x, y, ending_x, ending_y, fill=color)
 
-def draw_sprite16(sprite_data):
-    x = 0
-    y = 0
-    size = 20
-    for row in sprite_data:
-        for color in row:
-            draw_rectangle(x, y, size, size, color)
-            x += size
-        x = 0
-        y += size
-
-def draw_sprite32(sprite):
-    x = 0
-    y = 0
-    size = 10
-    for row in sprite:
-        for i in range(32):
-            if i < 8:
-                draw_rectangle(x, y, size, size, g)
-            elif i >= 24:
-                draw_rectangle(x, y, size, size, g)
-            else:
-                color = row[i - 8]
-                draw_rectangle(x, y, size, size, color)
-            x += size
-        x = 0
-        y += size      
-
 def draw_sprite(sprite):
-    if len(sprite) == 16:
-        draw_sprite16(sprite)
-    elif len(sprite) == 32:
-        draw_sprite32(sprite)
+    current_sprite = sprite
+    x = 0
+    y = 0
+    height_in_pixels = len(sprite)
+    width_in_pixels = len(sprite[0])
+    height = height_in_pixels * pixel_size
+    width = width_in_pixels * pixel_size
+    screen.config(width=width, height=height)
+
+    for row in sprite:
+        for color in row:
+            draw_rectangle(x, y, pixel_size, pixel_size, color)
+            x += pixel_size
+        x = 0
+        y += pixel_size
 
 def clear():
    screen.delete("all")
 
 def draw():
     clear()
-    current_option = clicked.get()
-    if current_option == "Small Mario":
-        draw_sprite16(small_mario)
-    elif current_option == "Goomba":
-        draw_sprite16(goomba)
-    elif current_option == "Big Mario":
-        draw_sprite32(big_mario)
+    current_selection = clicked.get()
+    if current_selection == "Small Mario":
+        draw_sprite(small_mario)
+    elif current_selection == "Goomba":
+        draw_sprite(goomba)
+    elif current_selection == "Big Mario":
+        draw_sprite(big_mario)
 
 draw_button = Button(root, text="Draw Sprite", command=draw)
 draw_button.pack()
 
-draw_button = Button(root, text="Clear Canvas", command=clear)
-draw_button.pack()
+clear_button = Button(root, text="Clear", command=clear)
+clear_button.pack()
 
 mainloop()
