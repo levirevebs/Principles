@@ -5,9 +5,10 @@ root = Tk()
 r ="#d62b18"
 b ="#876f16"
 s ="#fa9644"
-g = "#6185f8"
-l =  "#000000"
+g = "#6185f8" #background
+l =  "#000000" #black
 e = "#e1c699"
+gr = "#17b217" #green
 clear_color = "#4d2d44"
 pixel_size = 20
 
@@ -85,15 +86,26 @@ big_mario = [
     [g, b, b, b, b, b, b, g, g, g, g, b, b, b, b, b, b, g],
 ]
 
+peach = [
+    []
+]
+
+bowser = [
+    []
+]
+
 screen = Canvas(root, width=320, height=320, bg="#4d2d44")
 screen.pack()
 
 current_sprite = small_mario
+current_sprite_name = "Small Mario"
 
 options = [
     "Small Mario",
     "Big Mario",
-    "Goomba"
+    "Goomba",
+    "Princess Peach",
+    "Bowser"
 ]
 
 clicked = StringVar()
@@ -130,12 +142,25 @@ def clear():
 def draw():
     clear()
     current_selection = clicked.get()
+    current_sprite_name = current_selection
     if current_selection == "Small Mario":
         draw_sprite(small_mario)
     elif current_selection == "Goomba":
         draw_sprite(goomba)
     elif current_selection == "Big Mario":
         draw_sprite(big_mario)
+    elif current_selection == "Princess Peach":
+        draw_sprite(peach)
+    elif current_selection == "Bowser":
+        draw_sprite(bowser)
+
+def luigi():
+
+    pass
+
+def fire():
+
+    pass
 
 draw_button = Button(root, text="Draw Sprite", command=draw)
 draw_button.pack()
