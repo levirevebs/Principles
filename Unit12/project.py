@@ -9,6 +9,17 @@ g = "#6185f8" #background
 l =  "#000000" #black
 e = "#e1c699"
 gr = "#17b217" #green
+bw = "#ffffff" # bowser white and luigi white
+lg = "#0c9300" #luigi green
+ls = "#ea9e22" #luigi skin
+lw = bw
+fr = "#f73804" #fire red
+fw = "#ffe1ab" #fire white
+fs = "#ffa441" #fire skin
+pr = "#c41d0d"  # peach red
+pw = "#fffeff"  # peach white
+pc = "#f29900"  # peach crown and skin
+pp = "#dc4278"  #lost levels peach pink
 clear_color = "#4d2d44"
 pixel_size = 20
 
@@ -87,7 +98,18 @@ big_mario = [
 ]
 
 peach = [
-    []
+    [g, g, g, g, g, g, g, g, g, g, g, g, g, g, g, g],
+    [g, g, g, pc, g, pc, pc, g, pc, g, g, g, g, g, g, g],
+    [g, g, g, pc, pc, pc, pc, pc, pc, g, g, g, g, g, g, g],
+    [g, g, pr, pr, pr, pr, pr, pr, pr, pr, g, g, g, g, g, g],
+    [g, pr, pr, pr, pr, pr, pr, pr, pr, pr, pr, g, g, g, g, g],
+    [g, g, pr, pr, pr, pc, l, pc, pr, pr, pr, pr, g, g, g, g],
+    [g, g, g, pr, pc, pc, l, pc, pc, pr, pc, pr, g, g, g, g],
+    [g, g, pc, pc, pc, pc, pc, pc, pc, pr, pc, pr, g, g, g, g,],
+    [g, g, g, pc, pc, pc, pc, pc, pc, pc, pc, pr, pr, g, g, g],
+    [g, g, pc, pr, pr, pr, pc, pc, pc, pc, pc, pr, pr, g, g, g],
+    [g, g, pc, pr, pr, pc, pc, pc, pc, pr, pr, pr, pr, g, g, g],
+    [g, g, g, pc, pc, pc, pc, pc, pc, pr, pr, pr, pr, g, g, g],
 ]
 
 bowser = [
@@ -120,7 +142,6 @@ def draw_rectangle(x, y, width, height, color='#000000'):
     screen.create_rectangle(x, y, ending_x, ending_y, fill=color)
 
 def draw_sprite(sprite):
-    current_sprite = sprite
     x = 0
     y = 0
     height_in_pixels = len(sprite)
@@ -140,32 +161,73 @@ def clear():
    screen.delete("all")
 
 def draw():
+    global current_sprite
+    global current_sprite_name
     clear()
     current_selection = clicked.get()
     current_sprite_name = current_selection
     if current_selection == "Small Mario":
+        current_sprite = small_mario
         draw_sprite(small_mario)
     elif current_selection == "Goomba":
+        current_sprite = goomba
         draw_sprite(goomba)
     elif current_selection == "Big Mario":
+        current_sprite = big_mario
         draw_sprite(big_mario)
     elif current_selection == "Princess Peach":
+        current_sprite = peach
         draw_sprite(peach)
     elif current_selection == "Bowser":
+        current_sprite = bowser
         draw_sprite(bowser)
 
-def luigi():
 
-    pass
+def luigi():
+    if(current_sprite_name == "Small Mario" or current_sprite_name == "Big Mario"):
+        luigi_sprite = []
+        for row in current_sprite:
+            new_row = []
+            for color in row:
+                if color == r:
+                    new_row.append(lw)
+                elif color == s:
+                    new_row.append(ls)
+                elif color == b:
+                    new_row.append(lg)
+                else:
+                    new_row.append(color)
+            luigi_sprite.append(new_row)
+        draw_sprite(luigi_sprite)
 
 def fire():
-
-    pass
+    if(current_sprite_name == "Big Mario"):
+        fire_sprite = []
+        for row in current_sprite:
+            new_row = []
+            for color in row:
+                if color == r:
+                    new_row.append(fw)
+                elif color == s:
+                    new_row.append(fs)
+                elif color == b:
+                    new_row.append(fr)
+                else:
+                    new_row.append(color)
+            fire_sprite.append(new_row)
+        draw_sprite(fire_sprite)
 
 draw_button = Button(root, text="Draw Sprite", command=draw)
 draw_button.pack()
 
 clear_button = Button(root, text="Clear", command=clear)
 clear_button.pack()
+
+draw_luigi = Button(root, text="Draw Luigi", command=luigi)
+draw_luigi.pack()
+
+draw_fire = Button(root, text="Draw Fire", command=fire)
+draw_fire.pack()
+
 
 mainloop()
