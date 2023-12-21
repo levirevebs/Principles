@@ -110,6 +110,19 @@ peach = [
     [g, g, pc, pr, pr, pr, pc, pc, pc, pc, pc, pr, pr, g, g, g],
     [g, g, pc, pr, pr, pc, pc, pc, pc, pr, pr, pr, pr, g, g, g],
     [g, g, g, pc, pc, pc, pc, pc, pc, pr, pr, pr, pr, g, g, g],
+    [g, g, g, pr, pr, pw, pc, pc, pr, pw, pr, pr, pr, g, g, g,],
+    [g, g, pr, pr, pw, pc, pc, pw, pw, pw, pw, pr, pr, g, g, g],
+    [g, g, pr, pc, pw, pw, pw, pw, pc, pc, pw, pr, pr, g, g, g],
+    [g, pc, pc, pc, pc, pc, pc, pc, pc, pc, pw, pr, pr, g, g, g],
+    [g, g, pc, pc, pc, pc, pc, pc, pc, pw, pr, pr, pr, g, g, g],
+    [g, g, g, g, pr, pr, pw, pw, pw, pw, pr, pr, g, g, g, g,],
+    [g, g, g, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, g, g, g],
+    [g, g, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, g, g],
+    [g, g, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, g, g],
+    [g, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, g],
+    [g, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, g],
+    [g, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, g],
+    [pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw, pw],
 ]
 
 bowser = [
